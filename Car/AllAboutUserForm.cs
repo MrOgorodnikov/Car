@@ -48,8 +48,8 @@ namespace Car
             foreach (var payment in user.Payments)
             {
                 paymentsGridView.Rows.Add();
-                paymentsGridView.Rows[i].Cells[0].Value = payment.PayedDateTime;
-                paymentsGridView.Rows[i].Cells[1].Value = payment.PayedPrice;
+                paymentsGridView.Rows[i].Cells[0].Value = payment.DateTime;
+                paymentsGridView.Rows[i].Cells[1].Value = payment.Sum;
                 i++;
             }
             i = 0;

@@ -89,6 +89,8 @@ namespace Car
                 card3TextBox.Text = db.AdminSettings.FirstOrDefault(a => a.Name == "card3").Value;
                 card4TextBox.Text = db.AdminSettings.FirstOrDefault(a => a.Name == "card4").Value;
                 arduinoTextBox.Text = db.AdminSettings.FirstOrDefault(a => a.Name == "arduinoPort").Value;
+                admin1TextBox.Text = db.AdminSettings.FirstOrDefault(a => a.Name == "admin1").Value;
+                admin2TextBox.Text = db.AdminSettings.FirstOrDefault(a => a.Name == "admin2").Value;
             }
             catch (Exception)
             {

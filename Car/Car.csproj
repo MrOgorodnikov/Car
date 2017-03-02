@@ -185,12 +185,16 @@
     <Compile Include="Migrations\201702251407280_Phone.Designer.cs">
       <DependentUpon>201702251407280_Phone.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702251917393_Pay.cs" />
+    <Compile Include="Migrations\201702251917393_Pay.Designer.cs">
+      <DependentUpon>201702251917393_Pay.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AdminSettings.cs" />
     <Compile Include="Models\CarCheckerContext.cs" />
     <Compile Include="Models\DTO\AllUserData.cs" />
+    <Compile Include="Models\Pay.cs" />
     <Compile Include="Models\Payment.cs" />
-    <Compile Include="Models\Person.cs" />
     <Compile Include="Models\RFIDCard.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\WriteOff.cs" />
@@ -256,6 +260,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702251407280_Phone.resx">
       <DependentUpon>201702251407280_Phone.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702251917393_Pay.resx">
+      <DependentUpon>201702251917393_Pay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PaymentForm.resx">
       <DependentUpon>PaymentForm.cs</DependentUpon>

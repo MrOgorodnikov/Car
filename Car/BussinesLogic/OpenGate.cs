@@ -8,7 +8,7 @@ namespace Car.BussinesLogic
     {
         public static void Open(string cardId)
         {
-            //SendCommandToArduino();            
+            SendCommandToArduino();
             ChangeStatusInGarage(cardId);
         }
 

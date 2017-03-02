@@ -101,7 +101,7 @@ namespace Car
                             if (CheckACar.GetCarSratus(cardId) >= 0)                            
                                 OpenGate.Open(cardId);                            
                             else                            
-                                errorLabel.Text = "Not pay";                            
+                                errorLabel.Text = "Не уплачено!";                            
                         }
                         else
                             errorLabel.Text = "Пользователь не выехал из гаража, но пытается вьехать";
@@ -136,7 +136,6 @@ namespace Car
             errorLabel.Text = "Незарегистрированый человек!";
         }        
        
-
         private void Form1_Activated(object sender, EventArgs e)
         {
             allCards = db.Cards.Select(c => c.CardId).ToList();
@@ -144,7 +143,7 @@ namespace Car
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+           
         }        
 
         private void timer1_Tick(object sender, EventArgs e)

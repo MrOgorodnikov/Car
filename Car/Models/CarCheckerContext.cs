@@ -5,7 +5,6 @@ namespace Car.Model
 {
     class CarCheckerContext : DbContext
     {
-        
         public DbSet<User> Users { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<RFIDCard> Cards { get; set; }
@@ -14,9 +13,6 @@ namespace Car.Model
 
         public CarCheckerContext() :base("DbConnection")
         {
-
         }
-
-        
     }
 }

@@ -12,8 +12,8 @@ namespace Car.BussinesLogic
             db.Payments.Add(new Model.Payment
             {
                 PayUserId = user.Id,
-                PayedPrice = price,
-                PayedDateTime = DateTime.Now
+                Sum = price,
+                DateTime = DateTime.Now
             });
 
             db.SaveChanges();

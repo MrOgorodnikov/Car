@@ -24,13 +24,13 @@ namespace Car
                     Surname = surnameTextBox.Text,
                     GarageNumber = Convert.ToInt32(garageTextBox.Text),
                     CarNumber = carTextBox.Text,
+                    Phone = phoneTextBox.Text,
                     Birthday = (DateTime)new DateTimeConverter().ConvertFromString(birthDayTextBox.Text)
                 };
 
                 AddUser.AddNewUser(user, cardTextBox.Text);
                 DialogResult result = MessageBox.Show("Успех!", "Успех!", MessageBoxButtons.OK);
-                if (result == DialogResult.OK)
-                    Close();
+                
             }
             catch (Exception)
             {

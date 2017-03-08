@@ -45,6 +45,8 @@
             this.AddCardButton = new System.Windows.Forms.Button();
             this.settingsButton = new System.Windows.Forms.Button();
             this.controlButton = new System.Windows.Forms.Button();
+            this.phoneTextBox = new System.Windows.Forms.TextBox();
+            this.phoneLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // nameLabel
@@ -133,7 +135,7 @@
             // 
             // carTextBox
             // 
-            this.carTextBox.Location = new System.Drawing.Point(265, 192);
+            this.carTextBox.Location = new System.Drawing.Point(265, 198);
             this.carTextBox.Name = "carTextBox";
             this.carTextBox.Size = new System.Drawing.Size(100, 22);
             this.carTextBox.TabIndex = 9;
@@ -203,11 +205,29 @@
             this.controlButton.UseVisualStyleBackColor = true;
             this.controlButton.Click += new System.EventHandler(this.controlButton_Click);
             // 
+            // phoneTextBox
+            // 
+            this.phoneTextBox.Location = new System.Drawing.Point(265, 166);
+            this.phoneTextBox.Name = "phoneTextBox";
+            this.phoneTextBox.Size = new System.Drawing.Size(100, 22);
+            this.phoneTextBox.TabIndex = 17;
+            // 
+            // phoneLabel
+            // 
+            this.phoneLabel.AutoSize = true;
+            this.phoneLabel.Location = new System.Drawing.Point(106, 166);
+            this.phoneLabel.Name = "phoneLabel";
+            this.phoneLabel.Size = new System.Drawing.Size(49, 17);
+            this.phoneLabel.TabIndex = 18;
+            this.phoneLabel.Text = "Phone";
+            // 
             // AddUserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(734, 510);
+            this.Controls.Add(this.phoneLabel);
+            this.Controls.Add(this.phoneTextBox);
             this.Controls.Add(this.controlButton);
             this.Controls.Add(this.settingsButton);
             this.Controls.Add(this.AddCardButton);
@@ -254,5 +274,7 @@
         private System.Windows.Forms.Button AddCardButton;
         private System.Windows.Forms.Button settingsButton;
         private System.Windows.Forms.Button controlButton;
+        private System.Windows.Forms.TextBox phoneTextBox;
+        private System.Windows.Forms.Label phoneLabel;
     }
 }

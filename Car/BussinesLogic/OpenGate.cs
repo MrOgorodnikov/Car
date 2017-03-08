@@ -1,20 +1,22 @@
 ﻿using System.Linq;
 using Car.Model;
 using System.IO.Ports;
+using System.Threading;
 
 namespace Car.BussinesLogic
 {
     class OpenGate
     {
+        static bool firstOpen = true;
         public static void Open(string cardId)
-        {
+        {            
             SendCommandToArduino();
             ChangeStatusInGarage(cardId);
         }
 
         public static void OpenToGuest()
-        {
-            SendCommandToArduino();
+        {             
+            SendCommandToArduino();            
         }
 
         private static void ChangeStatusInGarage(string cardId)
@@ -34,12 +36,39 @@ namespace Car.BussinesLogic
         private static void SendCommandToArduino()
         {
             var db = new CarCheckerContext();
-            SerialPort serialPort1 = new SerialPort();
-            serialPort1.PortName = db.AdminSettings.FirstOrDefault(a => a.Name == "arduinoPort").Value;
-            serialPort1.BaudRate = 9600;
-            serialPort1.Open();
-            serialPort1.Write("5"); //any number bigger 1
-            if (serialPort1.IsOpen) serialPort1.Close();
+            
+            SerialPort serialPort1 = new SerialPort()
+            {
+                PortName = db.AdminSettings.FirstOrDefault(a => a.Name == "arduinoPort").Value,
+                BaudRate = 9600
+            };
+            
+            if (!serialPort1.IsOpen)
+            {                    
+                serialPort1.Open();                        
+                if (serialPort1.IsOpen)
+                {
+                    serialPort1.Write("5");                        
+                }
+            }
+            while (true)
+            {
+                if (firstOpen)
+                {
+                    firstOpen = false;
+                    serialPort1.Close();
+                    break;
+                }
+                var end = serialPort1.ReadChar();
+                if (end == 5)
+                {                    
+                    serialPort1.Close();
+                    break;
+                }
+            }
+            
+            
+
         }
     }
 }

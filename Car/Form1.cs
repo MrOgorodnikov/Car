@@ -14,14 +14,16 @@ namespace Car
         private Dictionary<string, string> adminSettings = new Dictionary<string, string>();
         private List<string> allCards;
         CarCheckerContext db = new CarCheckerContext();
-        
+        string inputDeviceName = "";
+        const string password = "0988905606";
+
         public Form1()
         {                   
             InitializeComponent();
 
-            RawInput _rawinput;
-            const bool CaptureOnlyInForeground = true;
-            _rawinput = new RawInput(Handle, CaptureOnlyInForeground);
+            RawInput _rawinput = new RawInput(Handle, true);
+            //const bool CaptureOnlyInForeground = true;
+            //_rawinput = new RawInput(Handle, CaptureOnlyInForeground);
             _rawinput.KeyPressed += OnKeyPressed;
 
             foreach (var admSetting in db.AdminSettings.ToList())
@@ -33,10 +35,7 @@ namespace Car
         private void OnKeyPressed(object sender, RawInputEventArg e)
         {
             inputDeviceName = e.KeyPressEvent.DeviceName;
-        }        
-        
-        string inputDeviceName = "";
-        const string password = "0988905606";
+        }     
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -48,73 +47,81 @@ namespace Car
                 if (cardId == password)
                 {
                     ReactionOnCard.SuperAdmin();
-                    textBox1.Text = "";
-                    textBox1.Focus();
+                    RemoveAndFocus();
                     return;
                 }
 
                 if (adminSettings["admin1"] == cardId || adminSettings["admin2"] == cardId)
                 {
                     ReactionOnCard.Admin();
-                    textBox1.Text = "";
-                    textBox1.Focus();
+                    RemoveAndFocus();
                     return;
                 }
 
-                if (adminSettings["adminDeviceName"] == inputDeviceName || 
-                    adminSettings.ContainsValue(cardId))
+                if (adminSettings["adminDeviceName"] == inputDeviceName || adminSettings.ContainsValue(cardId))
                 {
                     ReactionOnCard.SuperAdmin();
-                    textBox1.Text = "";
-                    textBox1.Focus();
+                    RemoveAndFocus();
                     return;
                 }
 
-                if (inputDeviceName == adminSettings["exitDeviceName"])
-                {
-                    if (allCards.Contains(cardId))
-                    {
-                        var db1 = new CarCheckerContext();
-                        var userId = db1.Cards.FirstOrDefault(c => c.CardId == cardId).UserId;
-                        var user = db1.Users.FirstOrDefault(u => u.Id == userId);
+                if (inputDeviceName == adminSettings["exitDeviceName"])                
+                    Exit(cardId);  
 
-                        if (user.InGarage)
-                            OpenGate.Open(cardId);
-                        else
-                            errorLabel.Text = "Пользователь не вьехал в гараж, но пытается выехать";
-                        KnownUser();
-                    }
-                    else
-                        UnknownPerson();
-                }
-                
-                if (inputDeviceName == adminSettings["entranceDeviceName"])
-                {
-                    if (allCards.Contains(cardId))
-                    {
-                        var db1 = new CarCheckerContext();
-                        var userId = db1.Cards.FirstOrDefault(c => c.CardId == cardId).UserId;
-                        var user = db1.Users.FirstOrDefault(u => u.Id == userId);
-
-                        if (!user.InGarage)
-                        {
-                            if (CheckACar.GetCarSratus(cardId) >= 0)                            
-                                OpenGate.Open(cardId);                            
-                            else                            
-                                errorLabel.Text = "Не уплачено!";                            
-                        }
-                        else
-                            errorLabel.Text = "Пользователь не выехал из гаража, но пытается вьехать";
-                        KnownUser();
-                    }
-                    else
-                        UnknownPerson();
-                }
-
-                textBox1.Text = "";
-                textBox1.Focus();                
+                if (inputDeviceName == adminSettings["entranceDeviceName"])                
+                    Entrance(cardId); 
             }
-        }       
+        }
+
+        private void Entrance(string cardId)
+        {
+            if (allCards.Contains(cardId))
+            {
+                var db1 = new CarCheckerContext();
+                var userId = db1.Cards.FirstOrDefault(c => c.CardId == cardId).UserId;
+                var user = db1.Users.FirstOrDefault(u => u.Id == userId);
+                KnownUser();
+
+                if (!user.InGarage)
+                {                    
+                    if (CheckACar.GetCarSratus(cardId) >= 0)
+                        OpenGate.Open(cardId);
+                    else
+                        errorLabel.Text = "Не уплачено!";
+                }
+                else
+                    errorLabel.Text = "Пользователь не выехал из гаража, но пытается вьехать";
+            }
+            else
+                UnknownPerson();
+            RemoveAndFocus();
+            
+        }
+
+        private void Exit(string cardId)
+        {
+            if (allCards.Contains(cardId))
+            {
+                var db1 = new CarCheckerContext();
+                var userId = db1.Cards.FirstOrDefault(c => c.CardId == cardId).UserId;
+                var user = db1.Users.FirstOrDefault(u => u.Id == userId);
+                KnownUser();
+                if (user.InGarage)
+                    OpenGate.Open(cardId);
+                else
+                    errorLabel.Text = "Пользователь не вьехал в гараж, но пытается выехать";
+            }
+            else
+                UnknownPerson();
+            RemoveAndFocus();            
+        }
+
+        private void RemoveAndFocus()
+        {
+            textBox1.Text = "";
+            inputDeviceName = "";
+            textBox1.Focus();
+        }
 
         private void KnownUser()
         {

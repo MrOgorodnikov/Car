@@ -24,11 +24,8 @@ namespace Car
 
         private void OnKeyPressed(object sender, RawInputEventArg e)
         {
-            if (ActiveControl == adminTextBox || ActiveControl == exitTextBox || ActiveControl == entranceTextBox)
-            {
-                ActiveControl.Text = e.KeyPressEvent.DeviceName;
-            }
-           
+            if (ActiveControl == adminTextBox || /*ActiveControl == exitTextBox ||*/ ActiveControl == entranceTextBox)            
+                ActiveControl.Text = e.KeyPressEvent.DeviceName; 
         }
 
         private void saveButton_Click(object sender, EventArgs e)

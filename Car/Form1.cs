@@ -4,6 +4,7 @@ using RawInput_dll;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO.Ports;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -38,11 +39,12 @@ namespace Car
         }     
 
         private void textBox1_TextChanged(object sender, EventArgs e)
-        {
+        {  
             if (textBox1.Text.Length == 10)
             {
                 var cardId = textBox1.Text;
                 errorLabel.Text = "";
+                textBox1.Text = "";                
 
                 if (cardId == password)
                 {
@@ -65,10 +67,9 @@ namespace Car
                     return;
                 }
 
-                if (inputDeviceName == adminSettings["exitDeviceName"])                
+                if (inputDeviceName.Substring(0, 20) == adminSettings["exitDeviceName"].Substring(0, 20))                
                     Exit(cardId);  
-
-                if (inputDeviceName == adminSettings["entranceDeviceName"])                
+                else                                
                     Entrance(cardId); 
             }
         }
@@ -80,7 +81,7 @@ namespace Car
                 var db1 = new CarCheckerContext();
                 var userId = db1.Cards.FirstOrDefault(c => c.CardId == cardId).UserId;
                 var user = db1.Users.FirstOrDefault(u => u.Id == userId);
-                KnownUser();
+                KnownUser(cardId);
 
                 if (!user.InGarage)
                 {                    
@@ -105,7 +106,7 @@ namespace Car
                 var db1 = new CarCheckerContext();
                 var userId = db1.Cards.FirstOrDefault(c => c.CardId == cardId).UserId;
                 var user = db1.Users.FirstOrDefault(u => u.Id == userId);
-                KnownUser();
+                KnownUser(cardId);
                 if (user.InGarage)
                     OpenGate.Open(cardId);
                 else
@@ -123,9 +124,9 @@ namespace Car
             textBox1.Focus();
         }
 
-        private void KnownUser()
+        private void KnownUser(string cardId)
         {
-            var user = BussinesLogic.Show.ShowUserByCardId(textBox1.Text);
+            var user = BussinesLogic.Show.ShowUserByCardId(cardId);
             nameLabel.Text = "Имя: " + user.User.Name;
             surnameLabel.Text = "Фамилия: " + user.User.Surname;
             GarageLabel.Text = "Номер гаража: " + user.User.GarageNumber;

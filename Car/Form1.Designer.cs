@@ -40,6 +40,7 @@ namespace Car
             this.phoneLabel = new System.Windows.Forms.Label();
             this.TextBox1Timer = new System.Windows.Forms.Timer(this.components);
             this.openButton = new System.Windows.Forms.Button();
+            this.dataSerialPort = new System.IO.Ports.SerialPort(this.components);
             this.SuspendLayout();
             // 
             // nameLabel
@@ -116,7 +117,7 @@ namespace Car
             // TextBox1Timer
             // 
             this.TextBox1Timer.Enabled = true;
-            this.TextBox1Timer.Interval = 10000;
+            this.TextBox1Timer.Interval = 1000;
             this.TextBox1Timer.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // openButton
@@ -129,6 +130,11 @@ namespace Car
             this.openButton.Text = "Открыть ворота";
             this.openButton.UseVisualStyleBackColor = true;
             this.openButton.Click += new System.EventHandler(this.openButton_Click);
+            // 
+            // dataSerialPort
+            // 
+            this.dataSerialPort.PortName = "COM5";
+            this.dataSerialPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.dataSerialPort_DataReceived);
             // 
             // Form1
             // 
@@ -166,6 +172,7 @@ namespace Car
         private System.Windows.Forms.Label phoneLabel;
         private System.Windows.Forms.Timer TextBox1Timer;
         private System.Windows.Forms.Button openButton;
+        private System.IO.Ports.SerialPort dataSerialPort;
     }
 }
 

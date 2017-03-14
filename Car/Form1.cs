@@ -17,26 +17,64 @@ namespace Car
         CarCheckerContext db = new CarCheckerContext();
         string inputDeviceName = "";
         const string password = "0988905606";
+        string cardIdFromSerialPort = "";
+        bool newRead = false;
+        public delegate void AddDataDelegate(String myString);
+        public AddDataDelegate myDelegate;
 
         public Form1()
         {                   
             InitializeComponent();
 
-            RawInput _rawinput = new RawInput(Handle, true);
-            //const bool CaptureOnlyInForeground = true;
-            //_rawinput = new RawInput(Handle, CaptureOnlyInForeground);
+            RawInput _rawinput = new RawInput(Handle, true);            
             _rawinput.KeyPressed += OnKeyPressed;
 
             foreach (var admSetting in db.AdminSettings.ToList())
             {
                 adminSettings.Add(admSetting.Name, admSetting.Value);
-            }           
+            }
 
+            SerialPort mySerialPort = new SerialPort("COM5");
+            
+            mySerialPort.BaudRate = 9600;
+            mySerialPort.Parity = Parity.None;
+            mySerialPort.StopBits = StopBits.One;
+            mySerialPort.DataBits = 8;
+            mySerialPort.Handshake = Handshake.None;
+            mySerialPort.DataReceived += new SerialDataReceivedEventHandler(GetId);
+            mySerialPort.Open();
+
+            this.myDelegate = new AddDataDelegate(AddDataMethod);
+        }
+        public void AddDataMethod(String myString)
+        {
+            textBox1.AppendText(myString);
         }
         private void OnKeyPressed(object sender, RawInputEventArg e)
         {
             inputDeviceName = e.KeyPressEvent.DeviceName;
-        }     
+        }
+        private void GetId(object sender, SerialDataReceivedEventArgs e)
+        {
+            var sp = (SerialPort)sender;  
+            var x = new List<int>();
+            for (int i = 0; i < 14; i++)
+                x.Add(sp.ReadChar());
+            x.RemoveAt(0);
+            sp.DiscardInBuffer();
+            var c = sp.BytesToRead;
+            string id = "";
+            foreach (var item in x)
+                id += (char)item;
+            id = id.Substring(2, 8);
+            string zero = "";
+            var answer = Convert.ToInt32(id, 16);
+            for (int i = 0; i < 10 - answer.ToString().Length; i++)
+                zero += "0";
+            var correcredId = zero + answer;
+            textBox1.Invoke(this.myDelegate, correcredId);            
+        }
+        
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {  
@@ -67,10 +105,11 @@ namespace Car
                     return;
                 }
 
-                if (inputDeviceName.Substring(0, 20) == adminSettings["exitDeviceName"].Substring(0, 20))                
-                    Exit(cardId);  
-                else                                
-                    Entrance(cardId); 
+                if (inputDeviceName == adminSettings["entranceDeviceName"])
+                    Entrance(cardId);
+                else
+                    Exit(cardId);
+                
             }
         }
 
@@ -156,7 +195,7 @@ namespace Car
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            textBox1.Focus();               
+            textBox1.Focus();            
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -167,6 +206,11 @@ namespace Car
         private void openButton_Click(object sender, EventArgs e)
         {
             OpenGate.OpenToGuest();
+        }
+
+        private void dataSerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            
         }
     }
 }

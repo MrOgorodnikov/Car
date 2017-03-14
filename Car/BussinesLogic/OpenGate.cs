@@ -2,6 +2,7 @@
 using Car.Model;
 using System.IO.Ports;
 using System;
+using System.Collections.Generic;
 
 namespace Car.BussinesLogic
 {
@@ -65,11 +66,10 @@ namespace Car.BussinesLogic
                 return;
             }
 
-            bool getAnswer = true;
-
+            bool getAnswer = true;            
+            var answer = serialPort1.ReadChar();
             while (getAnswer)
-            {
-                var answer = serialPort1.ReadChar();
+            {   
                 answer = serialPort1.ReadChar();
                 if (answer == end)
                 {

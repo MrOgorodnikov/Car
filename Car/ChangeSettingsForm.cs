@@ -48,6 +48,10 @@ namespace Car
         private void ChangeAdminSettings()
         {
             var db = new CarCheckerContext();
+            string openCount = "0";
+            if (db.AdminSettings.ToList().Count == 11)            
+                openCount = db.AdminSettings.ToList().FirstOrDefault(s => s.Name == "openCount").Value;            
+            
             db.AdminSettings.RemoveRange(db.AdminSettings.ToList());
             db.SaveChanges();
 
@@ -62,16 +66,12 @@ namespace Car
                 new AdminSettings{Name = "card4", Value = card4TextBox.Text},
                 new AdminSettings{Name = "arduinoPort", Value = arduinoTextBox.Text},
                 new AdminSettings{Name = "admin1", Value = admin1TextBox.Text},
-                new AdminSettings{Name = "admin2", Value = admin2TextBox.Text}
+                new AdminSettings{Name = "admin2", Value = admin2TextBox.Text},
+                new AdminSettings{Name = "openCount", Value = openCount}
             };
 
             db.AdminSettings.AddRange(newSettings);
             db.SaveChanges();
-        }
-
-        private void ChangeSettingsForm_Load(object sender, EventArgs e)
-        {
-            
         }
 
         private void ChangeSettingsForm_Shown(object sender, EventArgs e)
@@ -91,8 +91,6 @@ namespace Car
             }
             catch (Exception)
             {
-
-                
             }
             
         }

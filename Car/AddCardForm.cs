@@ -45,8 +45,7 @@ namespace Car
         private void CardTextBox_TextChanged(object sender, EventArgs e)
         {
             if (CardTextBox.Text.Length > 0)            
-                AddCardButton.Enabled = true;
-            
+                AddCardButton.Enabled = true;            
         }
     }
 }

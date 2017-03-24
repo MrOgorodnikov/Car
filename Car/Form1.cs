@@ -25,18 +25,13 @@ namespace Car
             RawInput _rawinput = new RawInput(Handle, true);            
             _rawinput.KeyPressed += OnKeyPressed;
 
-            foreach (var admSetting in db.AdminSettings.ToList())
-            {
-                adminSettings.Add(admSetting.Name, admSetting.Value);
-            }       
-            
+            foreach (var admSetting in db.AdminSettings.ToList())            
+                adminSettings.Add(admSetting.Name, admSetting.Value);  
         }
         
-        private void OnKeyPressed(object sender, RawInputEventArg e)
-        {
-            inputDeviceName = e.KeyPressEvent.DeviceName;
-        }
+        private void OnKeyPressed(object sender, RawInputEventArg e) => inputDeviceName = e.KeyPressEvent.DeviceName;
         
+
         private void textBox1_TextChanged(object sender, EventArgs e)
         {  
             if (textBox1.Text.Length == 10)

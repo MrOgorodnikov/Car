@@ -17,9 +17,21 @@ namespace Car.BussinesLogic
         }
 
         public static void OpenToGuest()
-        {            
-            new Action(SendCommandToArduino).BeginInvoke(null, null);
+        {
+            AddOneNewOpen();
+            //new Action(SendCommandToArduino).BeginInvoke(null, null);
             //SendCommandToArduino();            
+        }
+
+        private static void AddOneNewOpen()
+        {
+            using (var db = new CarCheckerContext())
+            {
+                var currentOpensCount = db.AdminSettings.FirstOrDefault(s => s.Name == "openCount").Value;
+                db.AdminSettings.FirstOrDefault(s => s.Name == "openCount").Value =
+                    (Convert.ToInt32(currentOpensCount) + 1).ToString();
+                db.SaveChanges();
+            }
         }
 
         private static void ChangeStatusInGarage(string cardId)

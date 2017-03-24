@@ -157,6 +157,12 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="BussinesLogic\Payment.cs" />
+    <Compile Include="GatesOpenStatistic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GatesOpenStatistic.Designer.cs">
+      <DependentUpon>GatesOpenStatistic.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201702181320308_InitialCreate.cs" />
     <Compile Include="Migrations\201702181320308_InitialCreate.Designer.cs">
       <DependentUpon>201702181320308_InitialCreate.cs</DependentUpon>
@@ -239,6 +245,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GatesOpenStatistic.resx">
+      <DependentUpon>GatesOpenStatistic.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702181320308_InitialCreate.resx">
       <DependentUpon>201702181320308_InitialCreate.cs</DependentUpon>

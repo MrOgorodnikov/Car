@@ -251,7 +251,6 @@
             this.Name = "ChangeSettingsForm";
             this.Text = "ChangeSettings";
             this.TopMost = true;
-            this.Load += new System.EventHandler(this.ChangeSettingsForm_Load);
             this.Shown += new System.EventHandler(this.ChangeSettingsForm_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();

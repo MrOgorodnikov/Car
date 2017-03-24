@@ -34,6 +34,7 @@
             this.allGarageInfoButton = new System.Windows.Forms.Button();
             this.showPaymentsButton = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.gateOpensButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // addPaymentButton
@@ -95,11 +96,22 @@
             this.textBox1.Size = new System.Drawing.Size(0, 15);
             this.textBox1.TabIndex = 0;
             // 
+            // gateOpensButton
+            // 
+            this.gateOpensButton.Location = new System.Drawing.Point(221, 162);
+            this.gateOpensButton.Name = "gateOpensButton";
+            this.gateOpensButton.Size = new System.Drawing.Size(115, 59);
+            this.gateOpensButton.TabIndex = 7;
+            this.gateOpensButton.Text = "Открытий ворот";
+            this.gateOpensButton.UseVisualStyleBackColor = true;
+            this.gateOpensButton.Click += new System.EventHandler(this.gateOpensButton_Click);
+            // 
             // ControlUsersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(598, 260);
+            this.Controls.Add(this.gateOpensButton);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.showPaymentsButton);
             this.Controls.Add(this.allGarageInfoButton);
@@ -124,5 +136,6 @@
         private System.Windows.Forms.Button allGarageInfoButton;
         private System.Windows.Forms.Button showPaymentsButton;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button gateOpensButton;
     }
 }

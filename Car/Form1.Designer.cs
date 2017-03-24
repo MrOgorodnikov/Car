@@ -97,11 +97,11 @@ namespace Car
             // errorLabel
             // 
             this.errorLabel.AutoSize = true;
-            this.errorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.errorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.errorLabel.ForeColor = System.Drawing.Color.Red;
             this.errorLabel.Location = new System.Drawing.Point(407, 260);
             this.errorLabel.Name = "errorLabel";
-            this.errorLabel.Size = new System.Drawing.Size(0, 38);
+            this.errorLabel.Size = new System.Drawing.Size(0, 91);
             this.errorLabel.TabIndex = 5;
             // 
             // phoneLabel
@@ -125,7 +125,7 @@ namespace Car
             this.openButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.openButton.Location = new System.Drawing.Point(273, 546);
             this.openButton.Name = "openButton";
-            this.openButton.Size = new System.Drawing.Size(181, 70);
+            this.openButton.Size = new System.Drawing.Size(590, 303);
             this.openButton.TabIndex = 8;
             this.openButton.Text = "Открыть ворота";
             this.openButton.UseVisualStyleBackColor = true;
@@ -140,7 +140,7 @@ namespace Car
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1163, 628);
+            this.ClientSize = new System.Drawing.Size(1163, 964);
             this.Controls.Add(this.openButton);
             this.Controls.Add(this.phoneLabel);
             this.Controls.Add(this.errorLabel);

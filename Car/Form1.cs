@@ -16,11 +16,7 @@ namespace Car
         private List<string> allCards;
         CarCheckerContext db = new CarCheckerContext();
         string inputDeviceName = "";
-        const string password = "0988905606";
-        string cardIdFromSerialPort = "";
-        bool newRead = false;
-        public delegate void AddDataDelegate(String myString);
-        public AddDataDelegate myDelegate;
+        const string password = "0988905606";        
 
         public Form1()
         {                   
@@ -32,50 +28,15 @@ namespace Car
             foreach (var admSetting in db.AdminSettings.ToList())
             {
                 adminSettings.Add(admSetting.Name, admSetting.Value);
-            }
-
-            SerialPort mySerialPort = new SerialPort("COM5");
+            }       
             
-            mySerialPort.BaudRate = 9600;
-            mySerialPort.Parity = Parity.None;
-            mySerialPort.StopBits = StopBits.One;
-            mySerialPort.DataBits = 8;
-            mySerialPort.Handshake = Handshake.None;
-            mySerialPort.DataReceived += new SerialDataReceivedEventHandler(GetId);
-            mySerialPort.Open();
-
-            this.myDelegate = new AddDataDelegate(AddDataMethod);
         }
-        public void AddDataMethod(String myString)
-        {
-            textBox1.AppendText(myString);
-        }
+        
         private void OnKeyPressed(object sender, RawInputEventArg e)
         {
             inputDeviceName = e.KeyPressEvent.DeviceName;
         }
-        private void GetId(object sender, SerialDataReceivedEventArgs e)
-        {
-            var sp = (SerialPort)sender;  
-            var x = new List<int>();
-            for (int i = 0; i < 14; i++)
-                x.Add(sp.ReadChar());
-            x.RemoveAt(0);
-            sp.DiscardInBuffer();
-            var c = sp.BytesToRead;
-            string id = "";
-            foreach (var item in x)
-                id += (char)item;
-            id = id.Substring(2, 8);
-            string zero = "";
-            var answer = Convert.ToInt32(id, 16);
-            for (int i = 0; i < 10 - answer.ToString().Length; i++)
-                zero += "0";
-            var correcredId = zero + answer;
-            textBox1.Invoke(this.myDelegate, correcredId);            
-        }
         
-
         private void textBox1_TextChanged(object sender, EventArgs e)
         {  
             if (textBox1.Text.Length == 10)
@@ -105,12 +66,36 @@ namespace Car
                     return;
                 }
 
-                if (inputDeviceName == adminSettings["entranceDeviceName"])
-                    Entrance(cardId);
-                else
-                    Exit(cardId);
+                //if (inputDeviceName.Contains("VID_FFFF&PID_0035")/* == adminSettings["entranceDeviceName"].Substring(0, 20)*/)
+                //{
+                    Open(cardId);
+                //}
+                //    Entrance(cardId);
+                //else
+                //    Exit(cardId);
+
                 
             }
+        }
+
+        private void Open(string cardId)
+        {
+            if (allCards.Contains(cardId))
+            {
+                var db1 = new CarCheckerContext();
+                var userId = db1.Cards.FirstOrDefault(c => c.CardId == cardId).UserId;
+                var user = db1.Users.FirstOrDefault(u => u.Id == userId);
+                KnownUser(cardId);
+                if (user.InGarage)               
+                    OpenGate.Open(cardId);                
+                else if (CheckACar.GetCarSratus(cardId) >= 0)
+                        OpenGate.Open(cardId);
+                    else
+                        errorLabel.Text = "Не уплачено!";
+            }
+            else
+                UnknownPerson();
+            RemoveAndFocus();
         }
 
         private void Entrance(string cardId)

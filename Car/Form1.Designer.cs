@@ -149,7 +149,7 @@ namespace Car
             this.Controls.Add(this.GarageLabel);
             this.Controls.Add(this.surnameLabel);
             this.Controls.Add(this.nameLabel);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "Пропуск атвомобилей";

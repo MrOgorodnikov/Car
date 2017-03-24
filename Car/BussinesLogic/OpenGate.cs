@@ -8,17 +8,16 @@ namespace Car.BussinesLogic
 {
     class OpenGate
     {
-        static bool firstOpen = true;
-        
+        static bool firstOpen = true;        
         public static void Open(string cardId)
         {
+            ChangeStatusInGarage(cardId);            
             new Action(SendCommandToArduino).BeginInvoke(null, null);
-            //SendCommandToArduino();
-            ChangeStatusInGarage(cardId);
+            //SendCommandToArduino();            
         }
 
         public static void OpenToGuest()
-        {
+        {            
             new Action(SendCommandToArduino).BeginInvoke(null, null);
             //SendCommandToArduino();            
         }
@@ -40,9 +39,7 @@ namespace Car.BussinesLogic
         private static void SendCommandToArduino()
         {
             var db = new CarCheckerContext();
-
             const int isReady = 4, end = 5;
-
 
             SerialPort serialPort1 = new SerialPort()
             {
@@ -50,14 +47,12 @@ namespace Car.BussinesLogic
                 BaudRate = 9600
             };
             
-            if (!serialPort1.IsOpen)
-            {                    
-                serialPort1.Open();                        
-                if (serialPort1.IsOpen)
-                {
-                    serialPort1.Write("5");                        
-                }
-            }
+            if (!serialPort1.IsOpen)                              
+                serialPort1.Open();            
+
+            if (serialPort1.IsOpen)
+                serialPort1.Write("5");
+
             serialPort1.DiscardInBuffer();
             if (firstOpen)
             {
@@ -82,13 +77,12 @@ namespace Car.BussinesLogic
                     SendCommandToArduino();
                     getAnswer = false;
                 }
+                
             }
             
 
         }
 
-        
-    
     }
 }
 

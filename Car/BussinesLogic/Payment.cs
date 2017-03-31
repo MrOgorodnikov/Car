@@ -15,23 +15,17 @@ namespace Car.BussinesLogic
                 Sum = price,
                 DateTime = DateTime.Now
             });
-
             db.SaveChanges();
-
             db.Users.FirstOrDefault(u => u.Id == user.Id).Balance += price;
-
             db.SaveChanges();
         }
 
         public static void WriteOff(double price)
         {
             var db = new CarCheckerContext();
-            foreach (var user in db.Users)
-            {
-                user.Balance -= price;
-            }
+            foreach (var user in db.Users)            
+                user.Balance -= price;            
             db.SaveChanges();
-
             db.WriteOff.Add(
                 new Models.WriteOff
                 {

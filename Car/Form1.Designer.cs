@@ -38,9 +38,9 @@ namespace Car
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.errorLabel = new System.Windows.Forms.Label();
             this.phoneLabel = new System.Windows.Forms.Label();
-            this.TextBox1Timer = new System.Windows.Forms.Timer(this.components);
+            this.FocusTimer = new System.Windows.Forms.Timer(this.components);
             this.openButton = new System.Windows.Forms.Button();
-            this.dataSerialPort = new System.IO.Ports.SerialPort(this.components);
+            this.DeleteTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // nameLabel
@@ -114,11 +114,11 @@ namespace Car
             this.phoneLabel.TabIndex = 6;
             this.phoneLabel.Text = "Телефон";
             // 
-            // TextBox1Timer
+            // FocusTimer
             // 
-            this.TextBox1Timer.Enabled = true;
-            this.TextBox1Timer.Interval = 1000;
-            this.TextBox1Timer.Tick += new System.EventHandler(this.timer1_Tick);
+            this.FocusTimer.Enabled = true;
+            this.FocusTimer.Interval = 10000;
+            this.FocusTimer.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // openButton
             // 
@@ -131,10 +131,11 @@ namespace Car
             this.openButton.UseVisualStyleBackColor = true;
             this.openButton.Click += new System.EventHandler(this.openButton_Click);
             // 
-            // dataSerialPort
+            // DeleteTimer
             // 
-            this.dataSerialPort.PortName = "COM5";
-            this.dataSerialPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.dataSerialPort_DataReceived);
+            this.DeleteTimer.Enabled = true;
+            this.DeleteTimer.Interval = 500;
+            this.DeleteTimer.Tick += new System.EventHandler(this.DeleteTimer_Tick);
             // 
             // Form1
             // 
@@ -154,9 +155,6 @@ namespace Car
             this.Name = "Form1";
             this.Text = "Пропуск атвомобилей";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Activated += new System.EventHandler(this.Form1_Activated);
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -170,9 +168,9 @@ namespace Car
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label errorLabel;
         private System.Windows.Forms.Label phoneLabel;
-        private System.Windows.Forms.Timer TextBox1Timer;
+        private System.Windows.Forms.Timer FocusTimer;
         private System.Windows.Forms.Button openButton;
-        private System.IO.Ports.SerialPort dataSerialPort;
+        private System.Windows.Forms.Timer DeleteTimer;
     }
 }
 

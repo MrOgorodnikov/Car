@@ -4,8 +4,10 @@ using RawInput_dll;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
+using System.Timers;
 using System.Windows.Forms;
 
 namespace Car
@@ -25,13 +27,13 @@ namespace Car
             RawInput _rawinput = new RawInput(Handle, true);            
             _rawinput.KeyPressed += OnKeyPressed;
 
+            
             foreach (var admSetting in db.AdminSettings.ToList())            
                 adminSettings.Add(admSetting.Name, admSetting.Value);  
-        }
-        
+        }        
+
         private void OnKeyPressed(object sender, RawInputEventArg e) => inputDeviceName = e.KeyPressEvent.DeviceName;
         
-
         private void textBox1_TextChanged(object sender, EventArgs e)
         {  
             if (textBox1.Text.Length == 10)
@@ -69,12 +71,13 @@ namespace Car
                 //else
                 //    Exit(cardId);
 
-                
+                RemoveAndFocus();
             }
         }
 
         private void Open(string cardId)
         {
+            allCards = db.Cards.Select(c => c.CardId).ToList();
             if (allCards.Contains(cardId))
             {
                 var db1 = new CarCheckerContext();
@@ -161,35 +164,24 @@ namespace Car
             carLabel.Text = "Номер машины: ";
             phoneLabel.Text = "Телефон: ";
             errorLabel.Text = "Незарегистрированый человек!";
-        }        
-       
-        private void Form1_Activated(object sender, EventArgs e)
-        {
-            allCards = db.Cards.Select(c => c.CardId).ToList();
         }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-           
-        }        
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            textBox1.Focus();            
+            textBox1.Focus();
         }
+                          
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            
-        }
+        private void openButton_Click(object sender, EventArgs e) => OpenGate.OpenToGuest();
 
-        private void openButton_Click(object sender, EventArgs e)
+        int previousTextLength = 0;
+        private void DeleteTimer_Tick(object sender, EventArgs e)
         {
-            OpenGate.OpenToGuest();
-        }
-
-        private void dataSerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
-        {
+            int currentTextLength = textBox1.Text.Length;
+            if (currentTextLength == previousTextLength && currentTextLength != 0)
+                textBox1.Text = "";
+            else
+                previousTextLength = currentTextLength;
             
         }
     }

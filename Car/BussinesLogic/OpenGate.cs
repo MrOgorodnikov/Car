@@ -11,19 +11,19 @@ namespace Car.BussinesLogic
         static bool firstOpen = true;        
         public static void Open(string cardId)
         {
-            ChangeStatusInGarage(cardId);            
-            new Action(SendCommandToArduino).BeginInvoke(null, null);
-            //SendCommandToArduino();            
+            ChangeStatusInGarage(cardId);
+            SendCommandToArduino();
+            //new Action(SendCommandToArduino).BeginInvoke(null, null);
         }
 
         public static void OpenToGuest()
         {
-            AddOneNewOpen();
+            AddOneOpenCount();
+            SendCommandToArduino();
             //new Action(SendCommandToArduino).BeginInvoke(null, null);
-            //SendCommandToArduino();            
         }
 
-        private static void AddOneNewOpen()
+        private static void AddOneOpenCount()
         {
             using (var db = new CarCheckerContext())
             {
@@ -59,7 +59,7 @@ namespace Car.BussinesLogic
                 BaudRate = 9600
             };
             
-            if (!serialPort1.IsOpen)                              
+            if (!serialPort1.IsOpen)                            
                 serialPort1.Open();            
 
             if (serialPort1.IsOpen)
@@ -75,12 +75,14 @@ namespace Car.BussinesLogic
 
             bool getAnswer = true;            
             var answer = serialPort1.ReadChar();
+            var answersCount = 0;
             while (getAnswer)
-            {   
+            {                
                 answer = serialPort1.ReadChar();
-                if (answer == end)
+                answersCount++;
+                if (answer == end || answersCount >=100)
                 {
-                    serialPort1.Close();
+                    serialPort1.Close();                    
                     getAnswer = false;
                 }
                 else if (answer == isReady)
@@ -89,12 +91,8 @@ namespace Car.BussinesLogic
                     SendCommandToArduino();
                     getAnswer = false;
                 }
-                
             }
-            
-
         }
-
     }
 }
 

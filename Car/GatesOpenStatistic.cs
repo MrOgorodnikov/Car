@@ -1,4 +1,5 @@
 ﻿using Car.Model;
+using Car.Models.DTO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,23 +21,31 @@ namespace Car
 
         private void GatesOpenStatistic_Load(object sender, EventArgs e)
         {
-            using (var db = new CarCheckerContext())
-            {
-                var opensCount = db.AdminSettings.ToList().FirstOrDefault(s => s.Name == "openCount").Value;
-                opensCountLabel.Text = opensCount;
-                var carsCount = Convert.ToInt32(opensCount) / 2;
-                carsCountLabel.Text = carsCount.ToString();
-            }
+            var garages = BussinesLogic.Show.GarageNumbers();            
+            garageComboBox.Items.AddRange(garages);
+            //garageComboBox.SelectedItem = garages.Last();
         }
 
-        private void deleteDataButton_Click(object sender, EventArgs e)
+        private void garageComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            using (var db = new CarCheckerContext())
+            var user = AllUserData.GetSelectedUser(garageComboBox.SelectedItem.ToString());
+            nameLabel.Text = user.Name;
+            surnameLabel.Text = user.Surname;
+
+            var dates = user.Entrances
+                .Select(en => en.EntranceDate)
+                .GroupBy(dt => dt)
+                .ToList()
+                ;
+
+            entrancesDataGrid.Rows.Clear();
+            int i = 0;
+            foreach (var entrance in dates)
             {
-                db.AdminSettings.ToList().FirstOrDefault(s => s.Name == "openCount").Value = "0";
-                db.SaveChanges();
-                opensCountLabel.Text = "0";
-                carsCountLabel.Text = "0";
+                entrancesDataGrid.Rows.Add();
+                entrancesDataGrid.Rows[i].Cells[0].Value = entrance.Key.Date.ToShortDateString();
+                entrancesDataGrid.Rows[i].Cells[1].Value = entrance.Count();
+                i++;
             }
         }
     }

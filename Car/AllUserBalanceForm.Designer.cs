@@ -33,7 +33,6 @@
             this.userName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.userSurname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.userPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userInGarage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.userBalance = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.balanceGridView)).BeginInit();
             this.SuspendLayout();
@@ -42,21 +41,21 @@
             // 
             this.balanceGridView.AllowUserToAddRows = false;
             this.balanceGridView.AllowUserToDeleteRows = false;
+            this.balanceGridView.AllowUserToResizeRows = false;
             this.balanceGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.balanceGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.garageNumber,
             this.userName,
             this.userSurname,
             this.userPhone,
-            this.userInGarage,
             this.userBalance});
             this.balanceGridView.Location = new System.Drawing.Point(12, 12);
             this.balanceGridView.MultiSelect = false;
             this.balanceGridView.Name = "balanceGridView";
             this.balanceGridView.ReadOnly = true;
-            this.balanceGridView.RowHeadersVisible = false;
+            this.balanceGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.balanceGridView.RowTemplate.Height = 24;
-            this.balanceGridView.Size = new System.Drawing.Size(1057, 589);
+            this.balanceGridView.Size = new System.Drawing.Size(951, 589);
             this.balanceGridView.TabIndex = 0;
             // 
             // garageNumber
@@ -86,13 +85,6 @@
             this.userPhone.ReadOnly = true;
             this.userPhone.Width = 160;
             // 
-            // userInGarage
-            // 
-            this.userInGarage.HeaderText = "Статус";
-            this.userInGarage.Name = "userInGarage";
-            this.userInGarage.ReadOnly = true;
-            this.userInGarage.Width = 120;
-            // 
             // userBalance
             // 
             this.userBalance.HeaderText = "Балланс";
@@ -106,7 +98,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1082, 613);
+            this.ClientSize = new System.Drawing.Size(972, 613);
             this.Controls.Add(this.balanceGridView);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "AllUserBalanceForm";
@@ -126,7 +118,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn userName;
         private System.Windows.Forms.DataGridViewTextBoxColumn userSurname;
         private System.Windows.Forms.DataGridViewTextBoxColumn userPhone;
-        private System.Windows.Forms.DataGridViewTextBoxColumn userInGarage;
         private System.Windows.Forms.DataGridViewTextBoxColumn userBalance;
     }
 }

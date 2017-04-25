@@ -30,8 +30,8 @@ namespace Car
         private void GetUserInfo()
         {
             var user = AllUserData.GetSelectedUser(garageComboBox.SelectedItem.ToString());      
-            nameTextBox.Text =user.Name;
-            surnameTextBox.Text =user.Surname;
+            nameTextBox.Text = user.Name;
+            surnameTextBox.Text = user.Surname;
             balanceTextBox.Text = CheckACar.GetCarStatus(Convert.ToInt32(garageComboBox.SelectedItem)).ToString();
             phoneTextBox.Text = user.Phone;
             birthdayTextBox.Text = user.Birthday.ToShortDateString();
@@ -48,16 +48,33 @@ namespace Car
             foreach (var payment in user.Payments)
             {
                 paymentsGridView.Rows.Add();
-                paymentsGridView.Rows[i].Cells[0].Value = payment.DateTime;
+                paymentsGridView.Rows[i].Cells[0].Value = payment.DateTime.Date.ToShortDateString();
                 paymentsGridView.Rows[i].Cells[1].Value = payment.Sum;
                 i++;
             }
+
             i = 0;
             cardsGridView.Rows.Clear();
             foreach (var card in user.Cards)
             {
                 cardsGridView.Rows.Add();
                 cardsGridView.Rows[i].Cells[0].Value = card.CardId;
+                i++;
+            }
+
+            var dates = user.Entrances
+                .Select(en => en.EntranceDate)
+                .GroupBy(dt => dt)
+                .ToList()
+                ;
+
+            entrancesDataGrid.Rows.Clear();
+            i = 0;
+            foreach (var entrance in dates)
+            {
+                entrancesDataGrid.Rows.Add();
+                entrancesDataGrid.Rows[i].Cells[0].Value = entrance.Key.Date.ToShortDateString();
+                entrancesDataGrid.Rows[i].Cells[1].Value = entrance.Count();
                 i++;
             }
         }

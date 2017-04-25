@@ -10,6 +10,7 @@ namespace Car.Model
         public DbSet<RFIDCard> Cards { get; set; }
         public DbSet<AdminSettings> AdminSettings { get; set; }
         public DbSet<WriteOff> WriteOff { get; set; }
+        public DbSet<Entrance> Entrances { get; set; }
 
         public CarCheckerContext() :base("DbConnection")
         {

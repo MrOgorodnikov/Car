@@ -10,6 +10,7 @@ namespace Car.Models.DTO
         public User User { get; set; }
         public RFIDCard Card { get; set; }
         public Payment Payment { get; set; }
+        public Entrance Entrance { get; set; }
 
         public static User GetSelectedUser(string selectedGarage)
         {
@@ -18,6 +19,7 @@ namespace Car.Models.DTO
             var user = db.Users
                         .Include(u => u.Payments)
                         .Include(u=> u.Cards)
+                        .Include(u => u.Entrances)
                         .FirstOrDefault(u => u.GarageNumber == garage);
 
             return user;

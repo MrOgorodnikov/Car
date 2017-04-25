@@ -102,7 +102,7 @@
             this.gateOpensButton.Name = "gateOpensButton";
             this.gateOpensButton.Size = new System.Drawing.Size(115, 59);
             this.gateOpensButton.TabIndex = 7;
-            this.gateOpensButton.Text = "Открытий ворот";
+            this.gateOpensButton.Text = "Статистика открытий ворот";
             this.gateOpensButton.UseVisualStyleBackColor = true;
             this.gateOpensButton.Click += new System.EventHandler(this.gateOpensButton_Click);
             // 

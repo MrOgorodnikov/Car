@@ -23,14 +23,8 @@ namespace Car
                 balanceGridView.Rows[i].Cells[0].Value = user.GarageNumber;
                 balanceGridView.Rows[i].Cells[1].Value = user.Name;
                 balanceGridView.Rows[i].Cells[2].Value = user.Surname;
-                balanceGridView.Rows[i].Cells[3].Value = user.Phone;
-                string inGarageStatus;
-                if (user.InGarage)                
-                    inGarageStatus = "В гараже";                
-                else                
-                    inGarageStatus = "Вне гаража";                
-                balanceGridView.Rows[i].Cells[4].Value = inGarageStatus;
-                balanceGridView.Rows[i].Cells[5].Value = user.Balance;
+                balanceGridView.Rows[i].Cells[3].Value = user.Phone;                
+                balanceGridView.Rows[i].Cells[4].Value = user.Balance;
                 i++;
             }
 

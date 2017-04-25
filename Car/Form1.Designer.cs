@@ -41,6 +41,8 @@ namespace Car
             this.FocusTimer = new System.Windows.Forms.Timer(this.components);
             this.openButton = new System.Windows.Forms.Button();
             this.DeleteTimer = new System.Windows.Forms.Timer(this.components);
+            this.rebootButton = new System.Windows.Forms.Button();
+            this.ballanceLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // nameLabel
@@ -99,7 +101,7 @@ namespace Car
             this.errorLabel.AutoSize = true;
             this.errorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.errorLabel.ForeColor = System.Drawing.Color.Red;
-            this.errorLabel.Location = new System.Drawing.Point(407, 260);
+            this.errorLabel.Location = new System.Drawing.Point(46, 442);
             this.errorLabel.Name = "errorLabel";
             this.errorLabel.Size = new System.Drawing.Size(0, 91);
             this.errorLabel.TabIndex = 5;
@@ -123,13 +125,16 @@ namespace Car
             // openButton
             // 
             this.openButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.openButton.Location = new System.Drawing.Point(273, 546);
+            this.openButton.Location = new System.Drawing.Point(62, 552);
             this.openButton.Name = "openButton";
             this.openButton.Size = new System.Drawing.Size(590, 303);
             this.openButton.TabIndex = 8;
             this.openButton.Text = "Открыть ворота";
             this.openButton.UseVisualStyleBackColor = true;
+            this.openButton.Visible = false;
             this.openButton.Click += new System.EventHandler(this.openButton_Click);
+            this.openButton.MouseLeave += new System.EventHandler(this.openButton_MouseLeave);
+            this.openButton.MouseMove += new System.Windows.Forms.MouseEventHandler(this.openButton_MouseMove);
             // 
             // DeleteTimer
             // 
@@ -137,11 +142,36 @@ namespace Car
             this.DeleteTimer.Interval = 500;
             this.DeleteTimer.Tick += new System.EventHandler(this.DeleteTimer_Tick);
             // 
+            // rebootButton
+            // 
+            this.rebootButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.rebootButton.Location = new System.Drawing.Point(1062, 12);
+            this.rebootButton.Name = "rebootButton";
+            this.rebootButton.Size = new System.Drawing.Size(336, 303);
+            this.rebootButton.TabIndex = 9;
+            this.rebootButton.Text = "Перезгрузка";
+            this.rebootButton.UseVisualStyleBackColor = true;
+            this.rebootButton.Click += new System.EventHandler(this.rebootButton_Click);
+            this.rebootButton.MouseLeave += new System.EventHandler(this.rebootButton_MouseLeave);
+            this.rebootButton.MouseMove += new System.Windows.Forms.MouseEventHandler(this.rebootButton_MouseMove);
+            // 
+            // ballanceLabel
+            // 
+            this.ballanceLabel.AutoSize = true;
+            this.ballanceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ballanceLabel.Location = new System.Drawing.Point(253, 240);
+            this.ballanceLabel.Name = "ballanceLabel";
+            this.ballanceLabel.Size = new System.Drawing.Size(148, 38);
+            this.ballanceLabel.TabIndex = 10;
+            this.ballanceLabel.Text = "Балланс";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1163, 964);
+            this.ClientSize = new System.Drawing.Size(1410, 964);
+            this.Controls.Add(this.ballanceLabel);
+            this.Controls.Add(this.rebootButton);
             this.Controls.Add(this.openButton);
             this.Controls.Add(this.phoneLabel);
             this.Controls.Add(this.errorLabel);
@@ -153,8 +183,10 @@ namespace Car
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MinimizeBox = false;
             this.Name = "Form1";
-            this.Text = "Пропуск атвомобилей";
+            this.Text = "Пропуск автомобилей";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -171,6 +203,8 @@ namespace Car
         private System.Windows.Forms.Timer FocusTimer;
         private System.Windows.Forms.Button openButton;
         private System.Windows.Forms.Timer DeleteTimer;
+        private System.Windows.Forms.Button rebootButton;
+        private System.Windows.Forms.Label ballanceLabel;
     }
 }
 

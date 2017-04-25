@@ -99,6 +99,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -138,6 +139,7 @@
     <Compile Include="BussinesLogic\CheckACar.cs" />
     <Compile Include="BussinesLogic\OpenGate.cs" />
     <Compile Include="BussinesLogic\ReactionOnCard.cs" />
+    <Compile Include="BussinesLogic\UserEntrances.cs" />
     <Compile Include="ChangeSettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -195,10 +197,39 @@
     <Compile Include="Migrations\201702251917393_Pay.Designer.cs">
       <DependentUpon>201702251917393_Pay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704201349543_Entrances.cs" />
+    <Compile Include="Migrations\201704201349543_Entrances.Designer.cs">
+      <DependentUpon>201704201349543_Entrances.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704201752568_ChangeEntrance.cs" />
+    <Compile Include="Migrations\201704201752568_ChangeEntrance.Designer.cs">
+      <DependentUpon>201704201752568_ChangeEntrance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704201801393_StupidErr.cs" />
+    <Compile Include="Migrations\201704201801393_StupidErr.Designer.cs">
+      <DependentUpon>201704201801393_StupidErr.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704211137484_qqq.cs" />
+    <Compile Include="Migrations\201704211137484_qqq.Designer.cs">
+      <DependentUpon>201704211137484_qqq.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704211156098_copy.cs" />
+    <Compile Include="Migrations\201704211156098_copy.Designer.cs">
+      <DependentUpon>201704211156098_copy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704211213261_aaa.cs" />
+    <Compile Include="Migrations\201704211213261_aaa.Designer.cs">
+      <DependentUpon>201704211213261_aaa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704211220489_copy1.cs" />
+    <Compile Include="Migrations\201704211220489_copy1.Designer.cs">
+      <DependentUpon>201704211220489_copy1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AdminSettings.cs" />
     <Compile Include="Models\CarCheckerContext.cs" />
     <Compile Include="Models\DTO\AllUserData.cs" />
+    <Compile Include="Models\Entrance.cs" />
     <Compile Include="Models\Pay.cs" />
     <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\RFIDCard.cs" />
@@ -273,6 +304,27 @@
     <EmbeddedResource Include="Migrations\201702251917393_Pay.resx">
       <DependentUpon>201702251917393_Pay.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704201349543_Entrances.resx">
+      <DependentUpon>201704201349543_Entrances.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704201752568_ChangeEntrance.resx">
+      <DependentUpon>201704201752568_ChangeEntrance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704201801393_StupidErr.resx">
+      <DependentUpon>201704201801393_StupidErr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704211137484_qqq.resx">
+      <DependentUpon>201704211137484_qqq.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704211156098_copy.resx">
+      <DependentUpon>201704211156098_copy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704211213261_aaa.resx">
+      <DependentUpon>201704211213261_aaa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704211220489_copy1.resx">
+      <DependentUpon>201704211220489_copy1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PaymentForm.resx">
       <DependentUpon>PaymentForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -305,7 +357,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">

@@ -8,19 +8,20 @@ namespace Car.BussinesLogic
 {
     class OpenGate
     {
-        static bool firstOpen = true;        
+        static bool firstOpen = true;
+        
         public static void Open(string cardId)
         {
             ChangeStatusInGarage(cardId);
-            SendCommandToArduino();
-            //new Action(SendCommandToArduino).BeginInvoke(null, null);
+            
+            new Action(SendCommandToArduino).BeginInvoke(null, null);
         }
 
         public static void OpenToGuest()
         {
             AddOneOpenCount();
-            SendCommandToArduino();
-            //new Action(SendCommandToArduino).BeginInvoke(null, null);
+            
+            new Action(SendCommandToArduino).BeginInvoke(null, null);
         }
 
         private static void AddOneOpenCount()
@@ -50,9 +51,9 @@ namespace Car.BussinesLogic
 
         private static void SendCommandToArduino()
         {
-            var db = new CarCheckerContext();
+            
             const int isReady = 4, end = 5;
-
+            var db = new CarCheckerContext();
             SerialPort serialPort1 = new SerialPort()
             {
                 PortName = db.AdminSettings.FirstOrDefault(a => a.Name == "arduinoPort").Value,
@@ -71,25 +72,31 @@ namespace Car.BussinesLogic
                 firstOpen = false;
                 serialPort1.Close();
                 return;
-            }
+            }            
 
-            bool getAnswer = true;            
+            bool getAnswer = true;
             var answer = serialPort1.ReadChar();
-            var answersCount = 0;
-            while (getAnswer)
-            {                
-                answer = serialPort1.ReadChar();
-                answersCount++;
-                if (answer == end || answersCount >=100)
+            var answersCount = 0;           
+
+
+            for(int i = 0; i < 15; i++)
+            {
+                answer = serialPort1.ReadChar();                
+                if (answer == end)
                 {
-                    serialPort1.Close();                    
-                    getAnswer = false;
+                    serialPort1.Close();
+                    break;
                 }
                 else if (answer == isReady)
                 {
                     serialPort1.Close();
                     SendCommandToArduino();
-                    getAnswer = false;
+                    break;
+                }
+                if (i == 14)
+                {
+                    serialPort1.Close();
+                    break;
                 }
             }
         }

@@ -52,7 +52,6 @@ namespace Car
             this.garageComboBox.MaxDropDownItems = 20;
             this.garageComboBox.Name = "garageComboBox";
             this.garageComboBox.Size = new System.Drawing.Size(121, 24);
-            this.garageComboBox.Sorted = true;
             this.garageComboBox.TabIndex = 0;
             this.garageComboBox.SelectedIndexChanged += new System.EventHandler(this.garageComboBox_SelectedIndexChanged);
             // 

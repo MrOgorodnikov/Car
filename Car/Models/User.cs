@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Car.Models;
+using System;
 using System.Collections.Generic;
 
 namespace Car.Model
@@ -18,11 +19,13 @@ namespace Car.Model
 
         public ICollection<Payment> Payments { get; set; }
         public ICollection<RFIDCard> Cards { get; set; }
+        public ICollection<Entrance> Entrances { get; set; }
 
         public User()
         {
             Payments = new List<Payment>();
             Cards = new List<RFIDCard>();
-        }        
+            Entrances = new List<Entrance>();
+        }
     }
 }

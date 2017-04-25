@@ -40,19 +40,21 @@
             this.statusTextBox = new System.Windows.Forms.TextBox();
             this.phoneTextBox = new System.Windows.Forms.TextBox();
             this.balanceTextBox = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.paymentsGridView = new System.Windows.Forms.DataGridView();
-            this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label8 = new System.Windows.Forms.Label();
             this.cardsGridView = new System.Windows.Forms.DataGridView();
-            this.cardId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.saveButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.birthdayTextBox = new System.Windows.Forms.TextBox();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
+            this.entrancesDataGrid = new System.Windows.Forms.DataGridView();
+            this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cardId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.entryCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.paymentsGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cardsGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.entrancesDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // garageComboBox
@@ -61,7 +63,6 @@
             this.garageComboBox.Location = new System.Drawing.Point(183, 12);
             this.garageComboBox.Name = "garageComboBox";
             this.garageComboBox.Size = new System.Drawing.Size(150, 24);
-            this.garageComboBox.Sorted = true;
             this.garageComboBox.TabIndex = 0;
             this.garageComboBox.SelectedIndexChanged += new System.EventHandler(this.garageComboBox_SelectedIndexChanged);
             // 
@@ -156,15 +157,6 @@
             this.balanceTextBox.Size = new System.Drawing.Size(150, 22);
             this.balanceTextBox.TabIndex = 11;
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(144, 370);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(89, 17);
-            this.label7.TabIndex = 12;
-            this.label7.Text = "Архив оплат";
-            // 
             // paymentsGridView
             // 
             this.paymentsGridView.AllowUserToAddRows = false;
@@ -173,36 +165,14 @@
             this.paymentsGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.date,
             this.price});
-            this.paymentsGridView.Location = new System.Drawing.Point(54, 431);
+            this.paymentsGridView.Location = new System.Drawing.Point(46, 364);
             this.paymentsGridView.Name = "paymentsGridView";
             this.paymentsGridView.RowHeadersVisible = false;
             this.paymentsGridView.RowHeadersWidth = 4;
             this.paymentsGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.paymentsGridView.RowTemplate.Height = 24;
-            this.paymentsGridView.Size = new System.Drawing.Size(288, 150);
+            this.paymentsGridView.Size = new System.Drawing.Size(250, 150);
             this.paymentsGridView.TabIndex = 13;
-            // 
-            // date
-            // 
-            this.date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.date.HeaderText = "Дата";
-            this.date.Name = "date";
-            this.date.Width = 132;
-            // 
-            // price
-            // 
-            this.price.HeaderText = "Сумма";
-            this.price.Name = "price";
-            this.price.Width = 80;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(533, 370);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(76, 17);
-            this.label8.TabIndex = 14;
-            this.label8.Text = "Все карты";
             // 
             // cardsGridView
             // 
@@ -213,26 +183,19 @@
             this.cardsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.cardsGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cardId});
-            this.cardsGridView.Location = new System.Drawing.Point(425, 431);
+            this.cardsGridView.Location = new System.Drawing.Point(315, 364);
             this.cardsGridView.Name = "cardsGridView";
             this.cardsGridView.ReadOnly = true;
             this.cardsGridView.RowHeadersVisible = false;
             this.cardsGridView.RowTemplate.Height = 24;
-            this.cardsGridView.Size = new System.Drawing.Size(271, 150);
+            this.cardsGridView.Size = new System.Drawing.Size(250, 150);
             this.cardsGridView.TabIndex = 15;
-            // 
-            // cardId
-            // 
-            this.cardId.HeaderText = "Номер карты";
-            this.cardId.Name = "cardId";
-            this.cardId.ReadOnly = true;
-            this.cardId.Width = 200;
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(317, 616);
+            this.saveButton.Location = new System.Drawing.Point(315, 549);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(124, 52);
+            this.saveButton.Size = new System.Drawing.Size(250, 52);
             this.saveButton.TabIndex = 16;
             this.saveButton.Text = "Сохранить";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -257,24 +220,72 @@
             // 
             // monthCalendar1
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(504, 154);
+            this.monthCalendar1.Location = new System.Drawing.Point(373, 107);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 19;
             this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
+            // 
+            // entrancesDataGrid
+            // 
+            this.entrancesDataGrid.AllowUserToAddRows = false;
+            this.entrancesDataGrid.AllowUserToDeleteRows = false;
+            this.entrancesDataGrid.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.entrancesDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.entryCount});
+            this.entrancesDataGrid.Location = new System.Drawing.Point(584, 364);
+            this.entrancesDataGrid.Name = "entrancesDataGrid";
+            this.entrancesDataGrid.ReadOnly = true;
+            this.entrancesDataGrid.RowHeadersVisible = false;
+            this.entrancesDataGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.entrancesDataGrid.RowTemplate.Height = 24;
+            this.entrancesDataGrid.Size = new System.Drawing.Size(250, 150);
+            this.entrancesDataGrid.TabIndex = 20;
+            // 
+            // date
+            // 
+            this.date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.date.HeaderText = "Дата";
+            this.date.Name = "date";
+            // 
+            // price
+            // 
+            this.price.HeaderText = "Сумма";
+            this.price.Name = "price";
+            this.price.Width = 85;
+            // 
+            // cardId
+            // 
+            this.cardId.HeaderText = "Номер карты";
+            this.cardId.Name = "cardId";
+            this.cardId.ReadOnly = true;
+            this.cardId.Width = 185;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Дата";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // entryCount
+            // 
+            this.entryCount.HeaderText = "Заездов";
+            this.entryCount.Name = "entryCount";
+            this.entryCount.ReadOnly = true;
+            this.entryCount.Width = 85;
             // 
             // AllAboutUserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(939, 710);
+            this.ClientSize = new System.Drawing.Size(870, 626);
+            this.Controls.Add(this.entrancesDataGrid);
             this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.birthdayTextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.cardsGridView);
-            this.Controls.Add(this.label8);
             this.Controls.Add(this.paymentsGridView);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.balanceTextBox);
             this.Controls.Add(this.phoneTextBox);
             this.Controls.Add(this.statusTextBox);
@@ -295,6 +306,7 @@
             this.Load += new System.EventHandler(this.AllAboutUserForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.paymentsGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cardsGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.entrancesDataGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -314,16 +326,17 @@
         private System.Windows.Forms.TextBox statusTextBox;
         private System.Windows.Forms.TextBox phoneTextBox;
         private System.Windows.Forms.TextBox balanceTextBox;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.DataGridView paymentsGridView;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DataGridView cardsGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cardId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn date;
-        private System.Windows.Forms.DataGridViewTextBoxColumn price;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox birthdayTextBox;
         private System.Windows.Forms.MonthCalendar monthCalendar1;
+        private System.Windows.Forms.DataGridView entrancesDataGrid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cardId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn entryCount;
     }
 }

@@ -4,6 +4,7 @@ using System.Data.Entity;
 using Car.Models.DTO;
 using System.Collections.Generic;
 using Car.Models;
+using System;
 
 namespace Car.BussinesLogic
 {
@@ -16,17 +17,32 @@ namespace Car.BussinesLogic
 
             var user = new AllUserData
             {
-                User = users.FirstOrDefault(u => u.CardId == card).User,
+                User = GetUserByCard(card),
                 Card = db.Cards.FirstOrDefault(c => c.CardId == card)
             };
 
             return user;
         }
 
+        public static User GetUserByCard(string card)
+        {
+            return new CarCheckerContext().Cards
+                .Include(c => c.User)
+                .ToList()
+                .FirstOrDefault(u => u.CardId == card)
+                .User;
+        }
+
         public static string[] GarageNumbers()
         {
             var db = new CarCheckerContext();
-            return db.Users.Select(u => u.GarageNumber.ToString()).ToArray();             
+            var garages = db.Users.Select(u => u.GarageNumber).OrderBy(k => k).ToArray();
+            var garagesInString = new List<string>();
+            foreach (var garage in garages)
+            {
+                garagesInString.Add(garage.ToString());
+            }
+            return garagesInString.ToArray();
         }
 
         public static List<WriteOff> GetAllWriteOff()

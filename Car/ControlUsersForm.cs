@@ -15,7 +15,7 @@ namespace Car
 
         private void allGarageInfoButton_Click(object sender, EventArgs e) => new AllUserBalanceForm().ShowDialog();        
 
-        private void showPaymentsButton_Click(object sender, EventArgs e) => new AllAboutUserForm().ShowDialog();  
+        private void showPaymentsButton_Click(object sender, EventArgs e) => new AllAboutUserForm().ShowDialog();
 
         private void gateOpensButton_Click(object sender, EventArgs e) => new GatesOpenStatistic().ShowDialog();
         

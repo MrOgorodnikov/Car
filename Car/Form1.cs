@@ -254,7 +254,6 @@ namespace Car
             }
             catch (Exception)
             {
-                
             }
             
         }
@@ -263,24 +262,36 @@ namespace Car
         {
             try
             {
-                rebootButton.BackColor = Form1.ActiveForm.BackColor;
+                rebootButton.BackColor = ActiveForm.BackColor;
             }
             catch (Exception)
             {
-
-                
             }
             
         }
 
         private void openButton_MouseMove(object sender, MouseEventArgs e)
         {
-            openButton.BackColor = Color.Green;
+            try
+            {
+                openButton.BackColor = Color.Green;
+            }
+            catch (Exception)
+            {
+            }
+            
         }
 
         private void openButton_MouseLeave(object sender, EventArgs e)
         {
-            openButton.BackColor = ActiveForm.BackColor;
+            try
+            {
+                openButton.BackColor = ActiveForm.BackColor;
+            }
+            catch (Exception)
+            {
+            }
+            
         }
     }
 }
